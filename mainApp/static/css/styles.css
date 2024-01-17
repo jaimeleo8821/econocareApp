@@ -1,0 +1,370 @@
+/*ESTILOS GENERALES*/
+*{
+    margin: 0px;
+    padding: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.box p, .box h2, .box h3, .box ul{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.box ul, .box ol{
+    margin-left: 20px;
+}
+
+body{
+    background-color: #F2F2F2;
+}
+
+.clearfix{
+    clear: both;
+    float: none;
+}
+
+/*ESTILOS PARA ERRORRES*/
+.rojo{
+    color: red;
+}
+
+/*ESTILOS PARA MENSAJES*/
+.messages,
+.alert,
+.alert-success{
+    display: block;
+    color: white;
+    text-align: center;
+    background: #2BA977;
+    width: 290px;
+    height: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 0px;
+    border-radius: 15px;
+}
+
+.alert-warning{
+    display: block;
+    color: white;
+    text-align: center;
+    background: #b93f3f;
+    width: 290px;
+    height: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 0px;
+    border-radius: 15px;
+}
+
+/*ESTILOS CABECERA*/
+header{
+    width: 1212px;
+    height: 140px;
+    background-color: #23282B;
+    margin: 0 auto;
+}
+
+#logotipo{
+    width: 35%;
+    height: 130px;
+    margin: 0 auto;
+    padding-top: 10px;
+}
+
+#logotipo img{
+    display: block;
+    width: 60px;
+    float: left;
+    margin-top: 20px;
+}
+
+#logotipo h1{
+    display: block;
+    float: left;
+    margin-top: 35px;
+    margin-left: 15px;
+    letter-spacing: 2px;
+    font-weight: lighter;
+    color: #2BA977
+}
+
+/*ESTILOS BARRA NAVEGACIÓN*/
+nav{
+    width: 1250px;
+    height: 40px;
+    margin: 0 auto;
+    background-color: #1B1E1F;
+    border: 1px solid #333333;
+    box-shadow: 0px 22px 22px gray;
+    font-size: 15px;
+}
+
+nav > ul{
+    text-decoration: none;
+    list-style: none;
+}
+
+nav > ul > li{
+    line-height: 40px;
+    float: left;
+}
+
+nav > ul > li > a{
+    display: block;
+    padding-right: 15px;
+    padding-left: 15px;
+    color: #D1D4D6;
+    text-decoration: none;
+}
+
+nav > ul > li > a:hover{
+    background-color: #2BA977;
+    box-shadow: 0px 0px 5px #444 inset;
+    color: white;
+    transition: 300ms;
+}
+
+nav > ul > li > ul{
+    display: none;
+    position: absolute;
+    color: white;
+    text-align: left;
+    width: 160px;
+    box-shadow: 0px 2px 2px gray;
+}
+
+nav > ul > li:hover > ul{
+    display: block;
+    margin: 0px;
+    color: white;
+    list-style: none;
+}
+
+nav > ul > li:hover > ul > li{
+    text-decoration: none;
+    background-color: #23282B;
+    border-bottom: 1px solid #d6d6d6;
+    padding: 8px;
+    line-height: 25px;
+    font-size: 13px;
+    transition: all 300ms;
+}
+
+nav > ul > li:hover > ul > li> a{
+    text-decoration: none;
+    color: #D1D4D6;
+    transition: all 300ms;
+}
+
+nav > ul > li:hover > ul > li:hover{
+    background-color: #2BA977;
+}
+
+nav > ul > li:hover > ul > li:hover > a{
+    display: block;
+    color: white;
+}
+
+
+.barra{
+    width: 1250px;
+    margin: 0 auto;
+}
+
+.esquina-izquierda{
+    display: block;
+    border-left: 20px solid transparent;
+    border-top: 10px solid #2B2F30;
+    float: left;
+}
+
+.esquina-derecha{
+    display: block;
+    border-right: 20px solid transparent;
+    border-top: 10px solid #2B2F30;
+    float: right;
+}
+
+.relleno-barra{
+    display: block;
+    width: 1210px;
+    height: 10px;
+    background-color: #2B2F30;
+    float: left;
+}
+
+/*ESTILOS DEL CONTENIDO CENTRAL*/
+#content{
+    width: 1212px;
+    min-height: 930px;
+    margin: 0 auto;
+    margin-bottom: 30px;
+    margin-top: 40px;
+}
+
+.box{
+    background: white;
+    width: 95%;
+    min-height: 930px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    margin: 0 auto;
+}
+
+.box .image{
+    width: 45%;
+    float: left;
+    margin-right: 40px;
+}
+
+.box .image img{
+    width: 100%;
+}
+
+.box a{
+    color: #444;
+    transition: 300ms all;
+    text-decoration: none;
+}
+
+.box a:hover{
+    color: #2BA977;
+}
+
+.box form{
+    width: 40%;
+}
+
+.box form input,
+.box form label{
+    display: block;
+    padding: 5px;
+    padding-left: 0px;
+}
+
+.box form input[type="text"],
+.box form input[type="email"],
+.box form input[type="password"],
+.box form textarea,
+.box form select{
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.box form select{
+    width: 20%;
+    padding: 5px;
+}
+
+.box form input[type="submit"],
+.box form input[type="button"],
+.box form button{
+    padding: 10px;
+    margin-top: 5px;
+    background-color: #2BA977;
+    color: white;
+    border: 1px solid black;
+    transition: 300ms all;
+    border-radius: 10px;
+}
+
+.box form input[type="submit"]:hover,
+.box form input[type="button"]:hover,
+.box form button:hover{
+    cursor: pointer;
+    background-color: #238a61;   
+}
+
+.title{
+    color: #444;
+    letter-spacing: 1px;
+    font-size: 30px;
+    margin-bottom: 10px;
+    margin-top: 5px;
+}
+
+.date{
+    display: block;
+    font-size: 15px;
+    color: gray;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+.content{
+    line-height: 20px;
+}
+
+.article-item{
+    margin-bottom: 20px;
+    margin-top: 20px;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    clear: both;
+}
+
+.article-item .image{
+    width: 200px;
+    height: 200px;
+    float: left;
+    overflow: hidden;
+}
+
+.article-item .image .img{
+    height: auto;
+    display: block;
+    max-width: 100%;
+}
+
+.article-item .data{
+    float: left;
+    padding: 15px;
+    padding-top: 0px;
+}
+
+.article-item h2{
+    display: block;
+    font-size: 25px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.article-item span.date{
+    display: block;
+    font-size: 15px;
+    color: gray;
+    margin-bottom: 10px;
+}
+
+.btn{
+    display: block;
+    padding: 10px;
+    background: rgb(197, 47, 47);
+    color: white;
+    border: 1px solid black;
+    margin-top: 15px;
+    width: 117px;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    transition: 300ms all;
+}
+
+.btn:hover{
+    cursor: pointer;
+    background-color: rgb(236, 41, 41);
+}
+
+footer{
+    width: 1250px;
+    background-color: #1B1E1F;
+    border: 1px solid #333;
+    color: #D1D4D6;
+    text-align: center;
+    margin: 0 auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    box-shadow: 0px 0px 20px gray;
+}

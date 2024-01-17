@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <title>
+        {% block title %}
+            <!--Título de cada página-->
+        {% endblock %}
+    </title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}" />
+</head>
+
+<body>
+
+    <!--Cabecera de la página-->
+    <header>
+        <div id="logotipo">
+            <!--Logo Django-->
+            <img src="{% static 'images/logo.png' %}" />
+            <h1>EconoCare</h1>
+        </div>
+    </header>
+    <nav>
+        <ul>
+            <li>
+                <a href="{% url 'index' %}">Inicio</a>
+            </li>
+            <li>
+                <a href="{% url 'create' %}">Crear Tipo movimiento</a>
+            </li>
+            <li>
+                <a href="/admin">Administración</a>
+            </li>
+            <li>
+                <a href="{% url 'logout' %}">Cerrar sesión</a>
+            </li>
+            <li>
+                <a href="{% url 'register' %}">Registro</a>
+            </li>
+            <li>
+                <a href="{% url 'login' %}">Identifícate</a>
+            </li>
+            
+        </ul>
+    </nav>
+    <div class="barra">
+        <span class="esquina-izquierda"></span>
+        <span class="relleno-barra"></span>
+        <span class="esquina-derecha"></span>
+    </div>
+
+    <div id="content">
+        <div class="box">
+            {% block content %}
+            <!--Código que viene de templates-->
+            <strong>Contenido del bloque original</strong>
+            {% endblock %}
+        </div>
+    </div>
+
+    <footer>
+        <p>EconoCare &copy; | Jaime Caicedo - 2023</p>
+    </footer>
+</body>
+
+</html>
