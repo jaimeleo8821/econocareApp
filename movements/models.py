@@ -1,3 +1,4 @@
+from autoslug import AutoSlugField
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -17,7 +18,7 @@ class Type(models.Model):
 
 #   TABLA DE CATEGORÍA DE MOVIMIENTO     #
 class Category(models.Model):
-    idType = models.ForeignKey(Type, verbose_name="Tipo", on_delete=models.CASCADE, null=False, blank=False)
+    idType = models.ForeignKey(Type, verbose_name="Tipo", on_delete=models.CASCADE, null=True, blank=True)
     category = models.CharField(max_length=100, verbose_name="Categoría")
 
     class Meta:
@@ -48,7 +49,7 @@ class Movement(models.Model):
     idCategory = models.ForeignKey(Category, verbose_name="Categoría", on_delete=models.CASCADE, null=False, blank=False)
     idPayMethod = models.ForeignKey(Pay_Method, verbose_name="Método de Pago", on_delete=models.CASCADE, null=False, blank=False)
     observations = models.CharField(max_length=100, verbose_name="Observaciones")
-    user = models.ForeignKey(User, verbose_name="Usuario", on_delete=models.CASCADE, null=False, blank=False)
+    user = models.ForeignKey(User, editable=False, verbose_name="Usuario", on_delete=models.CASCADE, null=False, blank=False)
 
     class Meta:
         verbose_name = 'Movimiento'

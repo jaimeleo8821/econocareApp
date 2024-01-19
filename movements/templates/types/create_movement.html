@@ -1,0 +1,14 @@
+{% extends 'layouts/layout.html' %}
+
+{% block title %} Nuevo Movimiento {% endblock %}
+
+{% block content %}
+    <h1 class="title">Crear un nuevo Movimiento</h1>
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form }}
+
+        <input type="submit" value="Guardar" />
+    </form>
+{% endblock %}

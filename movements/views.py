@@ -1,7 +1,8 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
+from django.template import RequestContext
 from movements.models import Movement, Type, Category, Pay_Method
-from movements.forms import FormCategory, FormPayMethod, FormType
+from movements.forms import FormCategory, FormMovement, FormPayMethod, FormType
 
 # Create your views here.
 def create_type(request):
@@ -35,14 +36,14 @@ def create_category(request):
 
         if categoryForm.is_valid():
             data_form = categoryForm.cleaned_data
-
-            type = data_form.get('type')
+            types = data_form['id']
             category = data_form.get('category')
             
             category = Category(
-                #type = type,  # Aquí debe ir la ForeignKey de Type 'idType_id'
+                idType = types,  # Aquí debe ir la ForeignKey de Type 'idType_id'
                 category = category
             )
+
             category.save()
 
             return redirect('create_category')
@@ -78,5 +79,40 @@ def create_payMethod(request):
         'form':payMethodForm
     })
 
+def create_movement(request):
+    if request.method == 'POST':
+
+        movementForm = FormMovement(request.POST)
+
+        if movementForm.is_valid():
+            data_form = movementForm.cleaned_data
+            date = data_form.get('date')
+            amount = data_form.get('amount')
+            type = data_form['idType']
+            category = data_form['idCategory']
+            paymethod = data_form['idPayMethod']
+            observations = data_form.get('observations')
+            user = data_form['user']
+            
+            category = Category(
+                date = date,
+                amount = amount,
+                idType = type,  # Aquí debe ir la ForeignKey de Type 'idType_id'
+                idCategory = category,
+                idPayMethod = paymethod,
+                observations = observations,
+                user = user
+            )
+
+            category.save()
+
+            return redirect('create_movement')
+
+    else:
+        movementForm = FormMovement()
+
+    return render(request, 'types/create_movement.html', {
+        'form':movementForm
+    })
 
 
