@@ -27,6 +27,11 @@
             <li>
                 <a href="{% url 'index' %}">Inicio</a>
             </li>
+            {% for category in categories %}
+                <li>
+                    <a href="{% url 'category' category.2 %}">{{category.1}}</a>
+                </li>
+            {% endfor %}
             <li>
                 <a href="{% url 'create_movement' %}">Crear Movimiento</a>
             </li>
@@ -35,6 +40,9 @@
             </li>
             <li>
                 <a href="{% url 'create_category' %}">Crear Categoría de movimiento</a>
+            </li>
+            <li>
+                <a href="{% url 'create_origin' %}">Crear Origen del movimiento</a>
             </li>
             <li>
                 <a href="{% url 'create_pay_method' %}">Crear Método de Pago</a>
