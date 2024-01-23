@@ -26,30 +26,68 @@
         <ul>
             <li>
                 <a href="{% url 'index' %}">Inicio</a>
-            </li>
-            {% for category in categories %}
-                <li>
-                    <a href="{% url 'category' category.2 %}">{{category.1}}</a>
-                </li>
-            {% endfor %}
             <li>
-                <a href="{% url 'create_movement' %}">Crear Movimiento</a>
+                <a href="{% url 'list_movements' %}">Movimientos</a>
+                <ul>
+                    <li><a href="{% url 'create_movement' %}">Nuevo Movimiento</a></li>
+                </ul>
             </li>
             <li>
-                <a href="{% url 'create_type' %}">Crear Tipo movimiento</a>
+                <a href="/admin">Configuración</a>
+                <ul>
+                    <li><a href="{% url 'create_type' %}">Nuevo Tipo</a></li>
+                    <li><a href="{% url 'create_category' %}">Nueva Categoría</a></li>
+                    <li><a href="{% url 'create_origin' %}">Nuevo Origen</a></li>
+                    <li><a href="{% url 'create_pay_method' %}">Nuevo Método de Pago</a></li>
+                </ul>
+
+            </li>
+            <!--
+            <li>
+                <a href="#">Tipo</a>
+                <ul>
+                    <li><a href="{% url 'create_type' %}">Nuevo Tipo</a></li>
+                    {% for type in types %}
+                        <li>
+                            <a href="{% url 'type' type.2 %}">{{type.1}}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
             </li>
             <li>
-                <a href="{% url 'create_category' %}">Crear Categoría de movimiento</a>
+                <a href="#">Categoría</a>
+                <ul>
+                    <li><a href="{% url 'create_category' %}">Nueva Categoría</a></li>
+                    {% for category in categories %}
+                        <li>
+                            <a href="{% url 'category' category.2 %}">{{category.1}}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
             </li>
             <li>
-                <a href="{% url 'create_origin' %}">Crear Origen del movimiento</a>
+                <a href="#">Origen</a>
+                <ul>
+                    <li><a href="{% url 'create_origin' %}">Nuevo Origen</a></li>
+                    {% for origin in origins %}
+                        <li>
+                            <a href="{% url 'origin' origin.2 %}">{{origin.1}}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
             </li>
             <li>
-                <a href="{% url 'create_pay_method' %}">Crear Método de Pago</a>
+                <a href="#">Método de Pago</a>
+                <ul>
+                    <li><a href="{% url 'create_pay_method' %}">Nuevo Método de Pago</a></li>
+                    {% for pay_method in pay_methods %}
+                        <li>
+                            <a href="{% url 'pay_method' pay_method.2 %}">{{pay_method.1}}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
             </li>
-            <li>
-                <a href="/admin">Administración</a>
-            </li>
+            -->
             <li>
                 <a href="{% url 'logout' %}">Cerrar sesión</a>
             </li>

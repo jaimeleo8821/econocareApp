@@ -2,31 +2,31 @@ from unicodedata import category
 from movements.models import Type, Category, Pay_Method, Movement, Origin
 
 def get_categories(request):
-    categories = Category.objects.values_list('id', 'category', 'slug', 'idType' )
+    categories = Category.objects.order_by('category').values_list('id', 'category', 'slug', 'idType' )
 
     return {
         'categories': categories
     }
 
 def get_types(request):
-    types = Type.objects.values_list('id', 'type', 'slug')
+    types = Type.objects.order_by('type').values_list('id', 'type', 'slug')
 
     return {
         'types': types
     }
 
 def get_origins(request):
-    origins = Origin.objects.values_list('id', 'origin', 'slug')
+    origins = Origin.objects.order_by('origin').values_list('id', 'origin', 'slug')
 
     return {
         'origins': origins
     }
 
 def get_pay_methods(request):
-    payMethods = Pay_Method.objects.values_list('id', 'payMethod', 'slug')
+    payMethods = Pay_Method.objects.order_by('payMethod').values_list('id', 'payMethod', 'slug')
 
     return {
-        'payMethods': payMethods
+        'pay_methods': payMethods
     }
 
 def get_movements(request):

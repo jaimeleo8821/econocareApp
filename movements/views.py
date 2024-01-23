@@ -1,10 +1,9 @@
-from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from movements.models import Movement, Type, Category, Pay_Method, Origin
 from movements.forms import CategoryForm, MovementForm, PayMethodForm, TypeForm, OriginForm
 from django.contrib import messages
 
-# Create your views here.
+# To create new parameters
 def create_type(request):
     if request.method == 'POST':
 
@@ -19,6 +18,7 @@ def create_type(request):
                 type = type
             )
             type.save()
+            messages.success(request, 'Nuevo Tipo de movimiento, creado')
 
             return redirect('create_type')
 
@@ -119,7 +119,7 @@ def create_movement(request):
             amount = data_form.get('amount')
             date = data_form.get('date')
             observations = data_form.get('observations')         
-            user = data_form.get('idUser')
+            user = data_form.get('user')
             
             movement = Movement(
                 idOrigin = origin,
@@ -133,6 +133,7 @@ def create_movement(request):
             )
 
             movement.save()
+            messages.success(request, 'Nuevo movimiento creado')
 
             return redirect('create_movement')
 
@@ -143,10 +144,40 @@ def create_movement(request):
         'form':movementForm
     })
 
+# Obtain a page for each element using slug in URL
 def category(request, slug):
+    category = Category.objects.get(slug=slug)
 
-    category = Category.objects.order_by('category').get(slug=slug)
-
-    return render(request, 'categories/categories.html', {
+    return render(request, 'categories/category.html', {
         'category': category
+    })
+
+def type(request, slug):
+    type = Type.objects.get(slug=slug)
+
+    return render(request, 'types/types.html',{
+        'type': type
+    })
+
+def origin(request, slug):
+    origin = Origin.objects.get(slug=slug)
+
+    return render(request, 'origins/origins.html',{
+        'origin': origin
+    })
+
+def pay_method(request, slug):
+    payMethod = Pay_Method.objects.get(slug=slug)
+
+    return render(request, 'pay_methods/pay_methods.html',{
+        'payMethodSlug': payMethod
+    })
+
+# List all movements
+def list_movements(request):
+    movements = Movement.objects.order_by('-date').all()
+
+    return render(request, 'movements/list_movements.html', {
+        'title': "Movimientos",
+        'list_movements': movements
     })

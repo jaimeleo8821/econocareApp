@@ -297,25 +297,12 @@ nav > ul > li:hover > ul > li:hover > a{
     line-height: 20px;
 }
 
-.article-item{
+.category-item{
     margin-bottom: 20px;
     margin-top: 20px;
     padding: 15px;
     border-bottom: 1px solid #eee;
     clear: both;
-}
-
-.article-item .image{
-    width: 200px;
-    height: 200px;
-    float: left;
-    overflow: hidden;
-}
-
-.article-item .image .img{
-    height: auto;
-    display: block;
-    max-width: 100%;
 }
 
 .article-item .data{

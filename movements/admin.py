@@ -5,8 +5,8 @@ class MovementAdmin(admin.ModelAdmin):
     readonly_fields = ('idUser',)
 
     def save_model(self, request, obj, form, change):
-        if not obj.user_id:
-            obj.user_id = request.user.id
+        if not obj.idUser_id:
+            obj.idUser_id = request.user.id
 
         obj.save()
 

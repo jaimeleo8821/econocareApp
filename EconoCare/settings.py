@@ -64,7 +64,10 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'movements.context_processor.get_categories'
+                'movements.context_processor.get_categories',
+                'movements.context_processor.get_types',
+                'movements.context_processor.get_origins',
+                'movements.context_processor.get_pay_methods',
             ],
         },
     },

@@ -1,0 +1,19 @@
+{% extends 'layouts/layout.html' %}
+
+{% block title %} {{ title }} {% endblock %}
+
+{% block content %}
+    <h1 class="title">{{ title }}</h1>
+    
+    {% for category in list_categories %}
+        <article class="category-item">
+            <div class="data">    
+                <p>
+                    <h2>{{category.category}}</h2>
+                </p>
+            </div>
+            <div class"clearfix"></div>
+        </article>
+    {% endfor %}
+
+{% endblock %}

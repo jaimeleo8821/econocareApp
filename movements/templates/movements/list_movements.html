@@ -1,0 +1,30 @@
+{% extends 'layouts/layout.html' %}
+
+{% block title %} {{ title }} {% endblock %}
+
+{% block content %}
+    <h1 class="title">{{ title }}</h1>
+
+    {% if message %}
+        {% for message in messages %}
+            <div class="alert alert-success">
+                {{ mesage }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    
+    {% for movement in list_movements %}
+        <article class="category-item">
+            <div class="data">    
+                <p>
+                    <h2 class="date">{{movement.date}}</h2>
+                    <p>
+                        {{ movement.amount }}
+                    </p>
+                </p>
+            </div>
+            <div class"clearfix"></div>
+        </article>
+    {% endfor %}
+
+{% endblock %}
