@@ -58,6 +58,7 @@ def login_page(request):
 
             if user is not None:
                 login(request, user)
+                messages.success(request, f'¡Bienvenido, { user }!')
                 return redirect('inicio')
             else:
                 messages.warning(request, 'No te has identificado correctamente')

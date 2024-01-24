@@ -1,30 +1,13 @@
 {% extends 'layouts/layout.html' %}
+{% load render_table from django_tables2 %}
 
-{% block title %} {{ title }} {% endblock %}
+{% block title %} Tabla de Movimientos {% endblock %}
 
 {% block content %}
-    <h1 class="title">{{ title }}</h1>
-
-    {% if message %}
-        {% for message in messages %}
-            <div class="alert alert-success">
-                {{ mesage }}
-            </div>
-        {% endfor %}
-    {% endif %}
+<h1 class="title">Movimientos</h1>
     
-    {% for movement in list_movements %}
-        <article class="category-item">
-            <div class="data">    
-                <p>
-                    <h2 class="date">{{movement.date}}</h2>
-                    <p>
-                        {{ movement.amount }}
-                    </p>
-                </p>
-            </div>
-            <div class"clearfix"></div>
-        </article>
-    {% endfor %}
+    <p>
+        {% render_table table %}
+    </p>
 
 {% endblock %}

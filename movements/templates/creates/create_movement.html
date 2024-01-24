@@ -3,6 +3,13 @@
 {% block title %} Nuevo Movimiento {% endblock %}
 
 {% block content %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
     <h1 class="title">Crear un nuevo Movimiento</h1>
 
     <form action="" method="POST">

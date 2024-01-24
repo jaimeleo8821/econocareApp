@@ -1,7 +1,6 @@
 from django import forms
 from django.core import validators
-from .models import Category, Type, Pay_Method, Movement, Origin
-from django.contrib.auth.models import User
+from .models import Category, Type, Pay_Method, Origin
 
 
 class TypeForm(forms.Form):
@@ -106,7 +105,7 @@ class MovementForm(forms.Form):
         label="Valor",
         decimal_places=2,
         required=True,
-        initial=0
+        initial=0,
     )  
     observations = forms.CharField(
         label="Descripción",
@@ -125,9 +124,4 @@ class MovementForm(forms.Form):
         label="Fecha del movimiento",
         required=True,
         input_formats=['%Y/%m/%d']
-    )
-    user = forms.ModelChoiceField(
-        queryset=User.objects.all(),
-        label="Usuario",
-        to_field_name="id"
     )

@@ -11,6 +11,6 @@ urlpatterns = [
     path('type/<str:slug>', views.type, name='type'),
     path('origin/<str:slug>', views.origin, name='origin'),
     path('pay-method/<str:slug>', views.pay_method, name='pay_method'),
-    path('movements/', views.list_movements, name="list_movements")
+    path('movements-list/', views.movements_list, name='movement_list'),
 
 ]

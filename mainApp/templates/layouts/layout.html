@@ -27,77 +27,39 @@
             <li>
                 <a href="{% url 'index' %}">Inicio</a>
             <li>
-                <a href="{% url 'list_movements' %}">Movimientos</a>
-                <ul>
-                    <li><a href="{% url 'create_movement' %}">Nuevo Movimiento</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="/admin">Configuración</a>
-                <ul>
-                    <li><a href="{% url 'create_type' %}">Nuevo Tipo</a></li>
-                    <li><a href="{% url 'create_category' %}">Nueva Categoría</a></li>
-                    <li><a href="{% url 'create_origin' %}">Nuevo Origen</a></li>
-                    <li><a href="{% url 'create_pay_method' %}">Nuevo Método de Pago</a></li>
-                </ul>
+            {% if user.username %}
+                <li>
+                    <a href="#">Movimientos</a>
+                    <ul>
+                        <li><a href="{% url 'create_movement' %}">Nuevo Movimiento</a></li>
+                        <li><a href="{% url 'movement_list' %}">Tabla de Movimientos</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Configuración</a>
+                    <ul>
+                        <li><a href="{% url 'create_type' %}">Nuevo Tipo</a></li>
+                        <li><a href="{% url 'create_category' %}">Nueva Categoría</a></li>
+                        <li><a href="{% url 'create_origin' %}">Nuevo Origen</a></li>
+                        <li><a href="{% url 'create_pay_method' %}">Nuevo Método de Pago</a></li>
+                        <li><a href="/admin">Panel de Administración</a></li>
+                    </ul>
 
-            </li>
-            <!--
-            <li>
-                <a href="#">Tipo</a>
-                <ul>
-                    <li><a href="{% url 'create_type' %}">Nuevo Tipo</a></li>
-                    {% for type in types %}
-                        <li>
-                            <a href="{% url 'type' type.2 %}">{{type.1}}</a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </li>
-            <li>
-                <a href="#">Categoría</a>
-                <ul>
-                    <li><a href="{% url 'create_category' %}">Nueva Categoría</a></li>
-                    {% for category in categories %}
-                        <li>
-                            <a href="{% url 'category' category.2 %}">{{category.1}}</a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </li>
-            <li>
-                <a href="#">Origen</a>
-                <ul>
-                    <li><a href="{% url 'create_origin' %}">Nuevo Origen</a></li>
-                    {% for origin in origins %}
-                        <li>
-                            <a href="{% url 'origin' origin.2 %}">{{origin.1}}</a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </li>
-            <li>
-                <a href="#">Método de Pago</a>
-                <ul>
-                    <li><a href="{% url 'create_pay_method' %}">Nuevo Método de Pago</a></li>
-                    {% for pay_method in pay_methods %}
-                        <li>
-                            <a href="{% url 'pay_method' pay_method.2 %}">{{pay_method.1}}</a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </li>
-            -->
-            <li>
-                <a href="{% url 'logout' %}">Cerrar sesión</a>
-            </li>
-            <li>
-                <a href="{% url 'register' %}">Registro</a>
-            </li>
-            <li>
-                <a href="{% url 'login' %}">Identifícate</a>
-            </li>
-            
+                </li>
+                <li>
+                    <a href="#">{{ user.first_name }} {{ user.last_name }}</a>
+                    <ul>
+                        <li><a href="{% url 'logout' %}">Cerrar sesión</a></li>
+                    </ul>
+                </li>
+            {% else %}
+                <li>
+                    <a href="{% url 'register' %}">Registro</a>
+                </li>
+                <li>
+                    <a href="{% url 'login' %}">Identifícate</a>
+                </li>    
+            {% endif %}
         </ul>
     </nav>
     <div class="barra">
@@ -109,8 +71,7 @@
     <div id="content">
         <div class="box">
             {% block content %}
-            <!--Código que viene de templates-->
-            <strong>Contenido del bloque original</strong>
+            <!-- Código que viene de templates con el contenido -->
             {% endblock %}
         </div>
     </div>

@@ -64,7 +64,7 @@ class Movement(models.Model):
     idType = models.ForeignKey(Type, verbose_name="Tipo", on_delete=models.CASCADE, null=False, blank=False)
     idCategory = models.ForeignKey(Category, verbose_name="Categoría", on_delete=models.CASCADE, null=False, blank=False)
     idPayMethod = models.ForeignKey(Pay_Method, verbose_name="Método de Pago", on_delete=models.CASCADE, null=False, blank=False)
-    amount = models.DecimalField(max_digits=6, decimal_places=2)
+    amount = models.DecimalField(max_digits=6, decimal_places=2, verbose_name="Valor")
     observations = models.CharField(max_length=100, verbose_name="Observaciones")
     date = models.DateField(verbose_name="Fecha")
     idUser = models.ForeignKey(User, editable=False, verbose_name="Usuario", on_delete=models.CASCADE, null=False, blank=False)

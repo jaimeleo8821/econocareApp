@@ -2,6 +2,10 @@ from django.shortcuts import render, redirect
 from movements.models import Movement, Type, Category, Pay_Method, Origin
 from movements.forms import CategoryForm, MovementForm, PayMethodForm, TypeForm, OriginForm
 from django.contrib import messages
+from django.contrib.auth.models import User
+from django.views.generic import ListView
+
+from movements.tables import MovementsTable
 
 # To create new parameters
 def create_type(request):
@@ -106,7 +110,12 @@ def create_payMethod(request):
 
 def create_movement(request):
     if request.method == 'POST':
-
+        
+        # To get the id of the user who is loged
+        userid = request.user.id
+        user_loged = User.objects.get(id=userid)
+        
+        # Take the form's data from the forms.py
         movementForm = MovementForm(request.POST)
 
         if movementForm.is_valid():
@@ -119,8 +128,9 @@ def create_movement(request):
             amount = data_form.get('amount')
             date = data_form.get('date')
             observations = data_form.get('observations')         
-            user = data_form.get('user')
+            user= user_loged
             
+            # Set the data that will be stored in the DB
             movement = Movement(
                 idOrigin = origin,
                 idType = types,
@@ -129,9 +139,9 @@ def create_movement(request):
                 amount = amount,
                 observations = observations,
                 date = date,
-                idUser = user 
+                idUser = user
             )
-
+            # Save the data into de the DB
             movement.save()
             messages.success(request, 'Nuevo movimiento creado')
 
@@ -174,10 +184,10 @@ def pay_method(request, slug):
     })
 
 # List all movements
-def list_movements(request):
-    movements = Movement.objects.order_by('-date').all()
+def movements_list(request):
+    table = MovementsTable(Movement.objects.order_by('-date').all())
+    table.paginate(page=request.GET.get("page", 1), per_page=25)
 
     return render(request, 'movements/list_movements.html', {
-        'title': "Movimientos",
-        'list_movements': movements
+        "table": table,
     })
