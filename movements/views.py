@@ -3,7 +3,7 @@ from movements.models import Movement, Type, Category, Pay_Method, Origin
 from movements.forms import CategoryForm, MovementForm, PayMethodForm, TypeForm, OriginForm
 from django.contrib import messages
 from django.contrib.auth.models import User
-from django.views.generic import ListView
+from django_tables2 import RequestConfig
 
 from movements.tables import MovementsTable
 
@@ -185,8 +185,9 @@ def pay_method(request, slug):
 
 # List all movements
 def movements_list(request):
-    table = MovementsTable(Movement.objects.order_by('-date').all())
-    table.paginate(page=request.GET.get("page", 1), per_page=25)
+    table = MovementsTable(Movement.objects.order_by("-date").all())
+    RequestConfig(request).configure(table)                             # Is used to let order columns
+    table.paginate(page=request.GET.get("page", 1), per_page=25)        # Is used to make pagination
 
     return render(request, 'movements/list_movements.html', {
         "table": table,
