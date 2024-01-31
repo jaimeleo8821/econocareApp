@@ -9,14 +9,16 @@
 
     {{register_form.errors}}
 
-    <form method='post' action=''>
+    <form method='post' action='' class="form">
         {% csrf_token %}
-
+        
         {% for field in register_form %}
             <label>{{field.label}}</label>
             {{field}}
         {% endfor %}
-
+        
         <input type='submit' value='Registrarse' />
+        
     </form>
+
 {% endblock %}

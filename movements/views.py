@@ -7,6 +7,8 @@ from django_tables2 import RequestConfig
 
 from movements.tables import MovementsTable
 
+from django_filters import FilterSet
+
 # To create new parameters
 def create_type(request):
     if request.method == 'POST':

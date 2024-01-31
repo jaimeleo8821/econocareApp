@@ -48,6 +48,10 @@ class CategoryForm(forms.Form):
         label = "Tipo de movimiento",
         to_field_name="id"
     )
+    type.widget.attrs.update({
+        'class': 'form-select form-select-sm', 
+        
+    })
         
     category = forms.CharField(
         label = "Categoría del Movimiento",
@@ -60,7 +64,8 @@ class CategoryForm(forms.Form):
         ]
     )    
     category.widget.attrs.update({
-        'placeholder':'Escriba un nombre para la categoría del movimiento'
+        'placeholder':'Escriba un nombre para la categoría del movimiento',
+        'class': 'form-control'
     })
 
 class PayMethodForm(forms.Form):

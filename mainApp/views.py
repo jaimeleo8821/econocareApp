@@ -26,11 +26,9 @@ def register_page(request):
         return redirect('inicio')
 
     else:
-        #register_form = UserCreationForm()
         register_form = RegisterForm()
 
         if request.method == 'POST':
-            #register_form = UserCreationForm(request.POST)
             register_form = RegisterForm(request.POST)
 
             if register_form.is_valid():
