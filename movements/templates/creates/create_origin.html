@@ -4,18 +4,23 @@
 
 {% block content %}
     {% if messages %}
-            {% for message in messages %}
-                <div class="alert alert-success">
-                    {{ message }}
-                </div>
-            {% endfor %}
-        {% endif %}
-    <h1 class="title">Crear un nuevo Origen de Movimiento</h1>
+        {% for message in messages %}
+            <div class="alert alert-success alert-dismissible fade show">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    <h1>Crear un nuevo Origen de Movimiento</h1>
 
     <form action="" method="POST">
-        {% csrf_token %}
-        {{ form }}
-
-        <input type="submit" value="Guardar" />
+        <div class="row mb-3">
+            <div class="col">
+              {% csrf_token %}
+              {{ form }}
+            </div>  
+        </div>
+    
+        <input class="btn btn-primary" type="submit" value="Guardar" />
     </form>
 {% endblock %}

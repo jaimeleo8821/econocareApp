@@ -17,7 +17,8 @@ class TypeForm(forms.Form):
     )
 
     movement_type.widget.attrs.update({
-        'placeholder':'Escriba un nombre para el tipo de movimiento'
+        'placeholder':'Escriba un nombre para el tipo de movimiento',
+        'class': 'form-control'
     })
 
     class Meta:
@@ -38,7 +39,8 @@ class OriginForm(forms.Form):
     )
 
     origin.widget.attrs.update({
-        'placeholder':'Escriba un nombre para el Origen del movimiento'
+        'placeholder':'Escriba un nombre para el Origen del movimiento',
+        'class': 'form-control'
     })
 
 class CategoryForm(forms.Form):
@@ -49,7 +51,7 @@ class CategoryForm(forms.Form):
         to_field_name="id"
     )
     type.widget.attrs.update({
-        'class': 'form-select form-select-sm', 
+        'class': 'form-select', 
         
     })
         
@@ -81,7 +83,8 @@ class PayMethodForm(forms.Form):
         ]
     )
     pay_method.widget.attrs.update({
-        'placeholder':'Escriba un nombre para método de pago'
+        'placeholder':'Escriba un nombre para método de pago',
+        'class': 'form-control'
     })
 
 class MovementForm(forms.Form):
@@ -91,27 +94,52 @@ class MovementForm(forms.Form):
         label="Origen del movimiento",
         to_field_name="id"
     )
+    idOrigin.widget.attrs.update({
+        'class': 'form-select', 
+        
+    })
+
     idType = forms.ModelChoiceField(
         queryset=Type.objects.all(),
         label="Tipo de movimiento",
         to_field_name="id"
     )
+    idType.widget.attrs.update({
+        'class': 'form-select', 
+        
+    })
+
     idCategory = forms.ModelChoiceField(
         queryset=Category.objects.all(),
         label="Categoría del movimiento",
         to_field_name="id"
     )
+    idCategory.widget.attrs.update({
+        'class': 'form-select', 
+        
+    })
+
     idPayMethod = forms.ModelChoiceField(
         queryset=Pay_Method.objects.all(),
         label="Método de Pago",
         to_field_name="id"
     )
+    idPayMethod.widget.attrs.update({
+        'class': 'form-select', 
+        
+    })
+
     amount = forms.DecimalField(
         label="Valor",
         decimal_places=2,
         required=True,
         initial=0,
-    )  
+    )
+    amount.widget.attrs.update({
+        'placeholder':'Opcional: Escriba el valor del movimiento',
+        'class': 'form-control'
+    })
+
     observations = forms.CharField(
         label="Descripción",
         max_length=40, 
@@ -123,8 +151,10 @@ class MovementForm(forms.Form):
         ]
     )
     observations.widget.attrs.update({
-        'placeholder':'Opcional: Escriba una descripción'
+        'placeholder':'Opcional: Escriba una descripción',
+        'class': 'form-control'
     })
+
     date = forms.DateField(
         label="Fecha del movimiento",
         required=True,
