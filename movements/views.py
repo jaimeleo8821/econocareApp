@@ -185,6 +185,7 @@ def pay_method(request, slug):
         'payMethodSlug': payMethod
     })
 
+
 # List all movements
 def movements_list(request):
     table = MovementsTable(Movement.objects.order_by("-date").all())

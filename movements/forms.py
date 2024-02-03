@@ -1,5 +1,7 @@
 from django import forms
 from django.core import validators
+
+from EconoCare import settings
 from .models import Category, Type, Pay_Method, Origin
 
 
@@ -87,6 +89,9 @@ class PayMethodForm(forms.Form):
         'class': 'form-control'
     })
 
+class DateInput(forms.DateInput):
+        input_type = 'date'
+
 class MovementForm(forms.Form):
 
     idOrigin = forms.ModelChoiceField(
@@ -155,8 +160,15 @@ class MovementForm(forms.Form):
         'class': 'form-control'
     })
 
+    
     date = forms.DateField(
         label="Fecha del movimiento",
         required=True,
-        input_formats=['%Y/%m/%d']
+        input_formats=settings.DATE_INPUT_FORMATS,
+        widget=DateInput
     )
+    date.widget.attrs.update({
+        'class': 'form-control',
+    })
+    
+    

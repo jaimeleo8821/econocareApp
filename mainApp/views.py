@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from mainApp.forms import RegisterForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -33,6 +34,7 @@ def register_page(request):
 
             if register_form.is_valid():
                 register_form.save()
+
                 messages.success(request, '¡Te haz registrado correctamente!')
 
                 return redirect('inicio')

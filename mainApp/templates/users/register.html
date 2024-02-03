@@ -5,19 +5,31 @@
 {% endblock %}
 
 {% block content %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success alert-dismissible fade show">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
     <h1>{{title}}</h1>
 
     {{register_form.errors}}
 
-    <form method='post' action='' class="form">
+    <form method='post' action='' class='form-control'>
         {% csrf_token %}
+
         
         {% for field in register_form %}
-            <label>{{field.label}}</label>
-            {{field}}
-        {% endfor %}
+            <div class="mb-3 mt-3">
+                <label class="form-label"> {{field.label}} </label>
+                {{field}}
+            </div>
+        {% endfor %}       
         
-        <input type='submit' value='Registrarse' />
+        <button class="btn btn-primary" type='submit'>Registrarse</button>
         
     </form>
 

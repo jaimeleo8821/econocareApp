@@ -3,19 +3,27 @@
 {% block title %} Nuevo Movimiento {% endblock %}
 
 {% block content %}
-    {% if messages %}
-        {% for message in messages %}
-            <div class="alert alert-success">
-                {{ message }}
-            </div>
-        {% endfor %}
-    {% endif %}
-    <h1 class="title">Crear un nuevo Movimiento</h1>
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-success alert-dismissible fade show">
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
 
-    <form action="" method="POST">
-        {% csrf_token %}
-        {{ form }}
+<h1>Crear un nuevo Movimiento</h1>
 
-        <input type="submit" value="Guardar" />
-    </form>
+
+<form action="" method="POST">
+    <div class="row mb-3">
+        <div class="col">
+          {% csrf_token %}
+          {{ form }}
+        </div>  
+    </div>
+
+    <input class="btn btn-primary" type="submit" value="Guardar" />
+</form>
+
 {% endblock %}
