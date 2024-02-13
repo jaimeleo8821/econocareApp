@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'mainApp',
     'movements.apps.MovementsConfig',
     'django_tables2',
+    'svg',
 ]
 
 MIDDLEWARE = [

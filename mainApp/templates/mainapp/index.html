@@ -6,7 +6,6 @@
     {% if messages %}
         {% for message in messages %}
             <div class="alert alert-success d-flex align-items-center" role="alert">
-                <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
                 <div>
                 {{ message }}
                 </div>
@@ -15,23 +14,35 @@
     {% endif %}
     
     <div class="container">
+
       <div class="row">
-        <div class="col-sm-12">
-          <h1>{{title}}</h1>
+        <div class="col">
+          <h1 class="fs-2 text-lg-start fw-bold">Resumen</h1>
         </div>
       </div>
 
       <div class="row">
-        <div class="col-sm">
-          <p>Área 1</p>
+        <div class="col m-2 bg-warning">
+          <h1 class="fs-3 text-center fw-bold">Orígen</h1>
+          <p>Aqui va el cuadro</p>
         </div>
-        <div class="col-sm">
-          <p>Área 2</p>
-        </div>
-        <div class="col-sm">
-          <p>Área 3</p>
+        <div class="col m-2 bg-success">
+          <h1 class="fs-3 text-center fw-bold">Tipo</h1>
+          <p>Aqui va el cuadro</p>
         </div>
       </div>
+
+      <div class="row">
+        <div class="col m-2 bg-warning">
+          <h1 class="fs-3 text-center fw-bold">Categoría</h1>
+          <p>Aqui va el cuadro</p>
+        </div>
+        <div class="col m-2 bg-danger">
+          <h1 class="fs-3 text-center fw-bold">Método de Pago</h1>
+          <p>Aqui va el cuadro</p>
+        </div>
+      </div>
+
     </div>
 
     

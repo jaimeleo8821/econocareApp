@@ -1,4 +1,5 @@
 {% load static %}
+{% load svg %}
 <!DOCTYPE html>
 <html lang="es">
 
@@ -14,111 +15,95 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}" />
 </head>
 
-<body>
-    <!--  HEADER   -->
-    <div class="row">
-        <header id="header" class="col-4 bg-dark text-white ps-5">
-            <div id="logotipo">
-                <!--Logo Django
-                <img src="{% static 'images/logo.png' %}" />
-                -->
-                <h1>EconoCare</h1>
+<body class="bg-bg-body-secondary">
+
+    <!-- NAV  -->
+    <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+        <div class="container-fluid">
+            <span class="navbar-brand fs-1 text-center fw-bold">Econocare</span>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+
+                    {% if user.username %}
+
+                        <li class="nav-item">
+                            <a class="nav-link active fs-4 text-center fw-bold" aria-current="page" href="{% url 'index' %}">Home</a>
+                        </li>
+                        
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle fs-4 text-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Movimientos
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonDark">
+                                <li><a class="dropdown-item" href="{% url 'create_movement' %}">Nuevo Movimiento</a></li>
+                                <li><a class="dropdown-item" href="{% url 'movement_list' %}">Tabla de Movimientos</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle fs-4 text-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Configuración
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{% url 'create_type' %}">Nuevo Tipo</a></li>
+                                <li><a class="dropdown-item" href="{% url 'create_category' %}">Nueva Categoría</a></li>
+                                <li><a class="dropdown-item" href="{% url 'create_origin' %}">Nuevo Origen</a></li>
+                                <li><a class="dropdown-item" href="{% url 'create_pay_method' %}">Nuevo Método de Pago</a></li>
+                                <li><a class="dropdown-item" href="/admin">Panel de Administración</a></li>
+                            </ul>
+
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle fs-4 text-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ user.first_name }} {{ user.last_name }}
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{% url 'logout' %}">Cerrar sesión</a></li>
+                            </ul>
+                        </li>
+
+                    {% else %}
+
+                        <li class="nav-item justify-content-end">
+                            <a class="nav-link active fs-4 text-center" aria-current="page" href="{% url 'register' %}">Registro</a>
+                        </li>
+                        <li class="nav-item justify-content-end">
+                            <a class="nav-link active fs-4 text-center" aria-current="page" href="{% url 'login' %}">Identifícate</a>
+                        </li>
+                        
+                    {% endif %}
+                </ul>
             </div>
-        </header>
-
-        <!-- NAV  -->
-        <div id="nav" class="col-8 bg-dark text-white pe-10">
-            <nav class="navbar navbar-expand-lg bg-dark border-bottom border-body" data-bs-theme="dark">
-                <div class="col-12 border">
-                    <a class="navbar-brand" href="{% url 'index' %}">Inicio</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-
-                    <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNavDropdown">
-                        <ul class="navbar-nav">
-
-                            {% if user.username %}
-                                
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Movimientos
-                                    </a>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonDark">
-                                        <li><a class="dropdown-item" href="{% url 'create_movement' %}">Nuevo Movimiento</a></li>
-                                        <li><a class="dropdown-item" href="{% url 'movement_list' %}">Tabla de Movimientos</a></li>
-                                    </ul>
-                                </li>
-
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Configuración
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="{% url 'create_type' %}">Nuevo Tipo</a></li>
-                                        <li><a class="dropdown-item" href="{% url 'create_category' %}">Nueva Categoría</a></li>
-                                        <li><a class="dropdown-item" href="{% url 'create_origin' %}">Nuevo Origen</a></li>
-                                        <li><a class="dropdown-item" href="{% url 'create_pay_method' %}">Nuevo Método de Pago</a></li>
-                                        <li><a class="dropdown-item" href="/admin">Panel de Administración</a></li>
-                                    </ul>
-
-                                </li>
-
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        {{ user.first_name }} {{ user.last_name }}
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="{% url 'logout' %}">Cerrar sesión</a></li>
-                                    </ul>
-                                </li>
-
-                            {% else %}
-
-                                <li class="nav-item justify-content-end">
-                                    <a class="nav-link active" aria-current="page" href="{% url 'register' %}">Registro</a>
-                                </li>
-                                <li class="nav-item justify-content-end">
-                                    <a class="nav-link active" aria-current="page" href="{% url 'login' %}">Identifícate</a>
-                                </li>
-                                
-                            {% endif %}
-                        </ul>
-                    </div>
-                </div>
-            </nav>
         </div>
-    </div>
-
+    </nav>
 
     <!--  CONTENT   -->
-    <div class="container">
+    <div class="container bg-body-secondary min-vh-100">
         <div class="row">
             <section id="content" class="col-12">
                 <div class="row">
-                    <section id="resume" class="col-9 border">
+                    <section id="resume" class="col border">
                         <div class="row border">
-                            <div class="col-12 border">
+                            <div class="col">
                                 {% block content %}
                                 <!-- Código que viene de templates con el contenido -->
                                 {% endblock %}
                             </div>
                         </div>    
                     </section>
-                    <aside class="col-3 border">
-                        <h2>Barra Lateral</h2>
-                    </aside>
                 </div>
             </section>
         </div>
     </div>
 
     <!--  FOOTER -->
-    <footer id="footer" class="container-fluid">
-        <div class="bg-dark text-white">
-            <p>EconoCare &copy; | Jaime Caicedo - 2023</p>
-        <div>
-    </div>
+    <footer class="container-fluid bg-dark">
+        <p class="fs-6 text-light text-center fw-bold p-2">EconoCare&reg; | Jaime Caicedo - 2024</p>
+    </footer>
 
     <!--Se cargan los scripts para Bootstrap y JQuery -->
     <script type="text/javascript" src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
