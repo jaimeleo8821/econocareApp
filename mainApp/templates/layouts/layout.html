@@ -11,8 +11,16 @@
             <!--Título de cada página-->
         {% endblock %}
     </title>
+    
+    <!--Se cargan los scripts para Bootstrap -->
     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}" />
+    
+    <!--Se cargan los scripts para DataTable.js -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.0/css/dataTables.dataTables.css" />
+    <!-- Font Awsome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
 </head>
 
 <body class="bg-bg-body-secondary">
@@ -108,6 +116,11 @@
     <!--Se cargan los scripts para Bootstrap y JQuery -->
     <script type="text/javascript" src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+    <!--Se cargan los scripts para DataTable.js -->
+    <script src="https://cdn.datatables.net/2.0.0/js/dataTables.js"></script>
+    <!-- Custom JS -->
+    <script src="{% static 'js/movements.js' %}"></script>
 
 </body>
 

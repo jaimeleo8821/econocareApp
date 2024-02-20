@@ -3,11 +3,7 @@ from movements.models import Movement, Type, Category, Pay_Method, Origin
 from movements.forms import CategoryForm, MovementForm, PayMethodForm, TypeForm, OriginForm
 from django.contrib import messages
 from django.contrib.auth.models import User
-from django_tables2 import RequestConfig
-
-from movements.tables import MovementsTable
-
-from django_filters import FilterSet
+from django.http.response import JsonResponse
 
 # To create new parameters
 def create_type(request):
@@ -171,13 +167,6 @@ def type(request, slug):
         'type': type
     })
 
-def origin(request, slug):
-    origin = Origin.objects.get(slug=slug)
-
-    return render(request, 'origins/origins.html',{
-        'origin': origin
-    })
-
 def pay_method(request, slug):
     payMethod = Pay_Method.objects.get(slug=slug)
 
@@ -185,13 +174,11 @@ def pay_method(request, slug):
         'payMethodSlug': payMethod
     })
 
+def movements_list_data(_request):
+    movements = list(Movement.objects.values())
+    data = {'movements' : movements}
+    return JsonResponse(data)
 
-# List all movements
 def movements_list(request):
-    table = MovementsTable(Movement.objects.order_by("-date").all())
-    RequestConfig(request).configure(table)                             # Is used to let order columns
-    table.paginate(page=request.GET.get("page", 1), per_page=25)        # Is used to make pagination
-
     return render(request, 'movements/list_movements.html', {
-        "table": table,
     })

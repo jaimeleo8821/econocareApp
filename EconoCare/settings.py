@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'mainApp',
     'movements.apps.MovementsConfig',
-    'django_tables2',
     'svg',
 ]
 

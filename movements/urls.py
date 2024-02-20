@@ -9,8 +9,8 @@ urlpatterns = [
     path('create-origin/', views.create_origin, name='create_origin'),
     path('category/<str:slug>', views.category, name='category'),
     path('type/<str:slug>', views.type, name='type'),
-    path('origin/<str:slug>', views.origin, name='origin'),
     path('pay-method/<str:slug>', views.pay_method, name='pay_method'),
+    path('movements-list-data/', views.movements_list_data, name='movement_list_data'),
     path('movements-list/', views.movements_list, name='movement_list'),
 
 ]
