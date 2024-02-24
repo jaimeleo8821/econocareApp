@@ -1,5 +1,8 @@
 from .models import Movement
-from django_filters.views import FilterView
-from django_filters import FilterSet
+import django_tables2 as tables
 
+class MovementHTMxTable (tables.Table):
+    class Meta:
+        model = Movement
+        template_name = "tables/bootstrap_htmx.html"
 

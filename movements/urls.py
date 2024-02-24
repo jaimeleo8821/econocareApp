@@ -1,5 +1,8 @@
 from django.urls import path
 from . import views
+from movements.views import(
+    MovementHTMxTableView
+)
 
 urlpatterns = [
     path('create-type/', views.create_type, name='create_type'),
@@ -10,7 +13,6 @@ urlpatterns = [
     path('category/<str:slug>', views.category, name='category'),
     path('type/<str:slug>', views.type, name='type'),
     path('pay-method/<str:slug>', views.pay_method, name='pay_method'),
-    path('movements-list-data/', views.movements_list_data, name='movement_list_data'),
-    path('movements-list/', views.movements_list, name='movement_list'),
+    path('movements-table', MovementHTMxTableView.as_view(), name='movement_table')
 
 ]

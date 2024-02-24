@@ -16,8 +16,6 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}" />
     
-    <!--Se cargan los scripts para DataTable.js -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.0/css/dataTables.dataTables.css" />
     <!-- Font Awsome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
@@ -47,7 +45,7 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonDark">
                                 <li><a class="dropdown-item" href="{% url 'create_movement' %}">Nuevo Movimiento</a></li>
-                                <li><a class="dropdown-item" href="{% url 'movement_list' %}">Tabla de Movimientos</a></li>
+                                <li><a class="dropdown-item" href="{% url 'movement_table' %}">Tabla de Movimientos</a></li>
                             </ul>
                         </li>
 
@@ -117,10 +115,8 @@
     <script type="text/javascript" src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 
-    <!--Se cargan los scripts para DataTable.js -->
-    <script src="https://cdn.datatables.net/2.0.0/js/dataTables.js"></script>
-    <!-- Custom JS -->
-    <script src="{% static 'js/movements.js' %}"></script>
+    <!--Se cargan los scripts para htmx -->
+    <script src="{% static 'js/htmx.min.js' %}" defer></script>
 
 </body>
 

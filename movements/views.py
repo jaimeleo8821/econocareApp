@@ -1,9 +1,16 @@
+from django.http import HttpRequest
 from django.shortcuts import render, redirect
-from movements.models import Movement, Type, Category, Pay_Method, Origin
-from movements.forms import CategoryForm, MovementForm, PayMethodForm, TypeForm, OriginForm
 from django.contrib import messages
 from django.contrib.auth.models import User
-from django.http.response import JsonResponse
+
+from django_tables2 import SingleTableMixin
+from django_filters.views import FilterView
+
+from movements.tables import MovementHTMxTable
+from movements.filters import MovementFilter
+
+from movements.models import Movement, Type, Category, Pay_Method, Origin
+from movements.forms import CategoryForm, MovementForm, PayMethodForm, TypeForm, OriginForm
 
 # To create new parameters
 def create_type(request):
@@ -174,11 +181,17 @@ def pay_method(request, slug):
         'payMethodSlug': payMethod
     })
 
-def movements_list_data(_request):
-    movements = list(Movement.objects.values())
-    data = {'movements' : movements}
-    return JsonResponse(data)
+# Table Movements with HTMX
+class MovementHTMxTableView(SingleTableMixin, FilterView):
+    table_class = MovementHTMxTable
+    queryset = Movement.objects.all()
+    filterset_class = MovementFilter
+    paginate_by = 15
 
-def movements_list(request):
-    return render(request, 'movements/list_movements.html', {
-    })
+    def get_template_names(self):
+        if self.request.htmx:
+            template_name = "movements/movement_table_partial.html"
+        else:
+            template_name = "movements/movement_table_htmx.html"
+        
+        return template_name
