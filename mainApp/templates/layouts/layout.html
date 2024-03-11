@@ -45,7 +45,7 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonDark">
                                 <li><a class="dropdown-item" href="{% url 'create_movement' %}">Nuevo Movimiento</a></li>
-                                <li><a class="dropdown-item" href="{% url 'movement_table' %}">Tabla de Movimientos</a></li>
+                                <li><a class="dropdown-item" href="{% url 'all_movements' %}">Todos los Movimientos</a></li>
                             </ul>
                         </li>
 
@@ -88,20 +88,14 @@
     </nav>
 
     <!--  CONTENT   -->
-    <div class="container bg-body-secondary min-vh-100">
+    <div class="container-md bg-body-secondary min-vh-100 p-1">
         <div class="row">
             <section id="content" class="col-12">
-                <div class="row">
-                    <section id="resume" class="col border">
-                        <div class="row border">
-                            <div class="col">
-                                {% block content %}
-                                <!-- Código que viene de templates con el contenido -->
-                                {% endblock %}
-                            </div>
-                        </div>    
-                    </section>
-                </div>
+                
+                {% block content %}
+                <!-- Código que viene de templates con el contenido -->
+                {% endblock %}
+                
             </section>
         </div>
     </div>

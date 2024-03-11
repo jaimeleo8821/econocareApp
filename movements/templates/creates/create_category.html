@@ -11,16 +11,34 @@
           </div>
         {% endfor %}
     {% endif %}
-    <h1>Crear nueva Categoría de movimiento</h1>
 
-    <form action="" method="POST">
-      <div class="row mb-3">
-        <div class="col">
-          {% csrf_token %}
-          {{ form }}
-        </div>  
+    <div class="row">
+
+      <div class="col-2"></div>
+  
+      <div class="col-8">
+          <div class="card text-center">
+              <div class="card-body">
+  
+                  <h1 class="card-title">Nueva Categoría</h1>
+          
+                  <p class="card-text">
+                      <form action="" method="POST">
+                          <div class="row m-2">
+                              <div class="col">
+                              {% csrf_token %}
+                              {{ form }}
+                              </div> 
+                          </div>
+                          <input class="btn btn-primary" type="submit" value="Guardar" />
+                      </form>
+                  </p>
+  
+              </div>
+          </div>
       </div>
-
-      <input class="btn btn-primary" type="submit" value="Guardar" />
-    </form>
+  
+      <div class="col-2"></div>
+  
+    </div>
 {% endblock %}

@@ -1,3 +1,4 @@
+from datetime import datetime
 from django import forms
 from django.core import validators
 
@@ -50,12 +51,9 @@ class CategoryForm(forms.Form):
     type = forms.ModelChoiceField(
         queryset=Type.objects.all(),
         label = "Tipo de movimiento",
-        to_field_name="id"
+        to_field_name="id",
+        widget=forms.RadioSelect()
     )
-    type.widget.attrs.update({
-        'class': 'form-select', 
-        
-    })
         
     category = forms.CharField(
         label = "Categoría del Movimiento",
@@ -89,30 +87,21 @@ class PayMethodForm(forms.Form):
         'class': 'form-control'
     })
 
-class DateInput(forms.DateInput):
-        input_type = 'date'
-
 class MovementForm(forms.Form):
 
     idOrigin = forms.ModelChoiceField(
         queryset=Origin.objects.all(),
         label="Origen del movimiento",
-        to_field_name="id"
+        to_field_name="id",
+        widget=forms.RadioSelect()
     )
-    idOrigin.widget.attrs.update({
-        'class': 'form-select', 
-        
-    })
 
     idType = forms.ModelChoiceField(
         queryset=Type.objects.all(),
         label="Tipo de movimiento",
-        to_field_name="id"
+        to_field_name="id",
+        widget=forms.RadioSelect()
     )
-    idType.widget.attrs.update({
-        'class': 'form-select', 
-        
-    })
 
     idCategory = forms.ModelChoiceField(
         queryset=Category.objects.all(),
@@ -165,10 +154,10 @@ class MovementForm(forms.Form):
         label="Fecha del movimiento",
         required=True,
         input_formats=settings.DATE_INPUT_FORMATS,
-        widget=DateInput
+        widget=forms.DateInput(attrs={
+             'class': 'form-control',
+             'type': 'date',
+             'max': datetime.now().date()})
     )
-    date.widget.attrs.update({
-        'class': 'form-control',
-    })
     
     

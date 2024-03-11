@@ -5,12 +5,29 @@ from django.contrib.auth.models import User
 
 from django_tables2 import SingleTableMixin
 from django_filters.views import FilterView
-
-from movements.tables import MovementHTMxTable
 from movements.filters import MovementFilter
 
-from movements.models import Movement, Type, Category, Pay_Method, Origin
-from movements.forms import CategoryForm, MovementForm, PayMethodForm, TypeForm, OriginForm
+from .tables import (MovementTable, )
+
+from movements.models import (Movement, Type, Category, Pay_Method, Origin)
+
+from movements.forms import (CategoryForm, MovementForm, PayMethodForm, TypeForm, OriginForm)
+
+# Using django_tables2
+class AllMovementsTable(SingleTableMixin, FilterView):
+    table_class = MovementTable
+    model = Movement
+    template_name = "movements/all_movements.html"
+    filterset_class = MovementFilter
+
+
+
+def all_movements_table(request):
+    table = MovementTable(Movement.objects.all())
+
+    return render(request, "movements/all_movements.html", {
+        "table": table
+    })
 
 # To create new parameters
 def create_type(request):
@@ -89,7 +106,7 @@ def create_category(request):
         'form':categoryForm
     })
 
-def create_payMethod(request):
+def create_pay_method(request):
     if request.method == 'POST':
 
         payMethodForm = PayMethodForm(request.POST)
@@ -180,18 +197,3 @@ def pay_method(request, slug):
     return render(request, 'pay_methods/pay_methods.html',{
         'payMethodSlug': payMethod
     })
-
-# Table Movements with HTMX
-class MovementHTMxTableView(SingleTableMixin, FilterView):
-    table_class = MovementHTMxTable
-    queryset = Movement.objects.all()
-    filterset_class = MovementFilter
-    paginate_by = 15
-
-    def get_template_names(self):
-        if self.request.htmx:
-            template_name = "movements/movement_table_partial.html"
-        else:
-            template_name = "movements/movement_table_htmx.html"
-        
-        return template_name

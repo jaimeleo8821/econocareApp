@@ -1,0 +1,38 @@
+{% extends 'layouts/layout.html' %}
+{% load render_table from django_tables2 %}
+{% load django_bootstrap5 %}
+
+{% block title %} {{title}} {% endblock %}
+
+{% block content %}
+    <div class="row">
+    
+        <div class="col-10">
+            <div class="card text-center">
+                <div class="card-body">
+    
+                    <h1 class="card-title">Todos los Movimientos</h1>
+
+                    {% render_table table %}
+    
+                </div>
+            </div>
+        </div>
+    
+        <div class="col-2">
+            <div class="card text-center">
+                <div class="card-body">
+    
+                    <h1 class="card-title">Filtrar</h1>
+                    {% if filter %}
+                        <form action="" method="get" class="form form-inline">
+                            {% bootstrap_form filter.form layout='inline' %}
+                            {% bootstrap_button 'filter' %}
+                        </form>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    
+      </div>
+{% endblock %}
