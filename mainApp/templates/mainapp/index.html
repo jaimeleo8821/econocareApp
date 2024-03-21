@@ -1,5 +1,5 @@
 {% extends 'layouts/layout.html' %}
-{% load render_table from django_tables2 %}
+{% load django_tables2 %}
 
 {% block title %} {{ title }} {% endblock %}
 
@@ -21,24 +21,26 @@
                 <h1 class="card-title fs-2 fw-bold">Resumen</h1>
             </div>
         </div>
-
-        <div class="card">
-            <div class="card-body">
-                {% for table, table_title in tables %}
-                    <div class="row">
-                        <div class="col m-1">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h1 class="card-title fs-3 text-center fw-bold">{{ table_title }}</h1>
-                                    <p class="card-text">{% render_table table %}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
-                
-            </div>
-        </div>
-
-    </div>
+          <div class="card-body">
+              <h5>Movimientos</h5>
+              <p>Total de Costos: {{ movements_total }}</p>
+              {% render_table movements_table %}
+              
+              <h5>Orígenes</h5>
+              <p>Total de Costos: {{ origins_total }}</p>
+              {% render_table origins_table %}
+              
+              <h5>Tipos</h5>
+              <p>Total de Costos: {{ types_total }}</p>
+              {% render_table types_table %}
+              
+              <h5>Categorías</h5>
+              <p>Total de Costos: {{ categories_total }}</p>
+              {% render_table categories_table %}
+              
+              <h5>Métodos de Pago</h5>
+              <p>Total de Costos: {{ paymethods_total }}</p>
+              {% render_table paymethods_table %}
+          </div>
+      </div>
 {% endblock %}
