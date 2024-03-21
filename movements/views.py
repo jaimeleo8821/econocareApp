@@ -1,17 +1,60 @@
+from pyexpat import model
 from django.http import HttpRequest
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
-
 from django_tables2 import SingleTableMixin
 from django_filters.views import FilterView
 from movements.filters import MovementFilter
-
-from .tables import (MovementTable, )
-
+from django_tables2 import MultiTableMixin, LazyPaginator
+from django.views.generic.base import TemplateView
+from django.db.models import Sum
+from .tables import (MovementTable, OriginTable, TypeTable, CategoryTable, PayMethodTable )
 from movements.models import (Movement, Type, Category, Pay_Method, Origin)
-
 from movements.forms import (CategoryForm, MovementForm, PayMethodForm, TypeForm, OriginForm)
+
+
+TEMPLATE_NAME = "mainapp/index.html"
+
+DJANGO_TABLES2_TABLE_ATTRS = {
+    'class': 'table table-hover',
+    'thead': {
+        'class': 'table-light',
+    },
+}
+
+# Multiple Tables in index.html
+class MovementsTable(MultiTableMixin, TemplateView):
+    template_name = TEMPLATE_NAME
+    paginator_class = LazyPaginator
+
+    def get_tables(self):
+        #Obtener las instancias de las tablas y calcular las sumas totales
+        origins = Origin.objects.annotate(total_amount=Sum('movement__amount'))
+        types = Type.objects.annotate(total_amount=Sum('movement__amount'))
+        categories = Category.objects.annotate(total_amount=Sum('movement__amount'))
+        pay_methods = Pay_Method.objects.annotate(total_amount=Sum('movement__amount'))
+
+        #se pasan las tablas junto con sus respectivos nombres a través del contexto para ser utilizadas en la plantilla
+        tables_data = [
+            (OriginTable(origins, exclude=("slug",), order_by="id", attrs=DJANGO_TABLES2_TABLE_ATTRS), 'Origen'),
+            (TypeTable(types, exclude=("slug",), order_by="id", attrs=DJANGO_TABLES2_TABLE_ATTRS), 'Tipo'),
+            (CategoryTable(categories, exclude=("slug",), order_by="id", attrs=DJANGO_TABLES2_TABLE_ATTRS), 'Categoría'),
+            (PayMethodTable(pay_methods, exclude=("slug",), order_by="id", attrs=DJANGO_TABLES2_TABLE_ATTRS), 'Método de Pago'),
+        ]
+
+        return tables_data
+
+
+    def get_context_data(self, **kwargs):
+        #método get_context_data, se obtienen las instancias de las tablas
+        context = super().get_context_data(**kwargs)
+        context['title'] = "Resumen"
+        tables_data = self.get_tables()
+        context['tables'] = [(table[0], table[1]) for table in tables_data]
+        #Localizar el campo "amount" si es necesario
+        context['localize'] = "amount"
+        return context
 
 # Using django_tables2
 class AllMovementsTable(SingleTableMixin, FilterView):
@@ -21,13 +64,11 @@ class AllMovementsTable(SingleTableMixin, FilterView):
     filterset_class = MovementFilter
 
 
-
-def all_movements_table(request):
-    table = MovementTable(Movement.objects.all())
-
-    return render(request, "movements/all_movements.html", {
-        "table": table
-    })
+def origin_table_view(request):
+    origins = Origin.objects.annotate(total_amount = Sum('movement__amount'))
+    
+    table = OriginTable(origins)
+    return render(request, 'origins/origins.html', {'table': table})
 
 # To create new parameters
 def create_type(request):

@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from .views import AllMovementsTable
+from .views import AllMovementsTable, MovementsTable
 
 urlpatterns = [
     path('create-type/', views.create_type, name='create_type'),
@@ -12,5 +12,7 @@ urlpatterns = [
     path('type/<str:slug>', views.type, name='type'),
     path('pay-method/<str:slug>', views.pay_method, name='pay_method'),
     path('all-movements/', AllMovementsTable.as_view(), name='all_movements'),
+    path('resume/', MovementsTable.as_view(), name='resume'),
+    path('origin-table/', views.origin_table_view, name='origin-table'),
 
 ]

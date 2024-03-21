@@ -1,13 +1,14 @@
 {% extends 'layouts/layout.html' %}
+{% load render_table from django_tables2 %}
 
-{% block title %} {{title}} {% endblock %}
+{% block title %} {{ title }} {% endblock %}
 
 {% block content %}
     {% if messages %}
         {% for message in messages %}
             <div class="alert alert-success d-flex align-items-center" role="alert">
                 <div>
-                {{ message }}
+                    {{ message }}
                 </div>
             </div>
         {% endfor %}
@@ -15,62 +16,29 @@
     
     <div class="container-md">
 
-      <div id="titleCard" class="card text-center m-1">
-        <div class="card-body">
-              <h1 class="card-title fs-2 fw-bold">Resumen</h1>
+        <div class="card text-center m-1">
+            <div class="card-body">
+                <h1 class="card-title fs-2 fw-bold">Resumen</h1>
+            </div>
         </div>
-      </div>
 
-      <div id="containerCard" class="card">
-        <div class="card-body">
-
-          <div class="row">
-
-            <div class="col m-1">
-              <div class="card">
-                <div class="card-body">
-                  <h1 class="card-title fs-3 text-center fw-bold">Orígen</h1>
-                  <p class="card-text">Aqui va el cuadro</p>
-                </div>
-              </div>
+        <div class="card">
+            <div class="card-body">
+                {% for table, table_title in tables %}
+                    <div class="row">
+                        <div class="col m-1">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h1 class="card-title fs-3 text-center fw-bold">{{ table_title }}</h1>
+                                    <p class="card-text">{% render_table table %}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                
             </div>
-
-            <div class="col m-1">
-              <div class="card">
-                <div class="card-body">
-                  <h1 class="card-title fs-3 text-center fw-bold">Tipo</h1>
-                  <p class="card-text">Aqui va el cuadro</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-
-            <div class="col m-1">
-              <div class="card">
-                <div class="card-body">
-                  <h1 class="card-title fs-3 text-center fw-bold">Categoría</h1>
-                  <p class="card-text">Aqui va el cuadro</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="col m-1">
-              <div class="card">
-                <div class="card-body">
-                  <h1 class="card-title fs-3 text-center fw-bold">Métodod de Pago</h1>
-                  <p class="card-text">Aqui va el cuadro</p>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
         </div>
-      </div>
 
     </div>
-
-    
 {% endblock %}
